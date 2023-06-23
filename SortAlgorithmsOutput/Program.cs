@@ -1,7 +1,7 @@
 ﻿using SortAlgorithmsLibrary;
 int min = -100;
 int max = 100;
-int[] arr = GenerateRandomArray(10, min, max);
+int[] arr = GenerateRandomArray(15, min, max);
 Console.WriteLine("Unsorted");
 foreach (var item in arr)
 {
@@ -12,7 +12,7 @@ int[] expected = new int[arr.Length];
 Array.Copy(arr, expected, arr.Length);
 Array.Sort(expected);
 
-SortAlgorithms.CombSort(arr);
+SortAlgorithms.IntroSort(arr);
 
 Console.WriteLine("Expected");
 foreach (int i in expected)

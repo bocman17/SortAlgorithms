@@ -84,9 +84,12 @@
                 if (arr[j] < pivot)
                 {
                     i++;
+
+                    // Swap elements if they are less than or equal to the pivot
                     Swap(arr, i, j);
                 }
             }
+            // Move the pivot to its correct position
             Swap(arr, i + 1, right);
 
             return i + 1;
