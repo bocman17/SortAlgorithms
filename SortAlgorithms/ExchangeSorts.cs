@@ -1,6 +1,7 @@
 ﻿namespace SortAlgorithmsLibrary
+
 {
-    public partial class SortAlgorithms
+    public class ExchangeSorts : SortAlgorithms
     {
         public static void BubbleSort(int[] arr)
         {
@@ -21,27 +22,6 @@
                 if (!swapped)
                 {
                     break;
-                }
-            }
-        }
-
-        public static void GnomeSort(int[] arr)
-        {
-            int n = arr.Length;
-            int i = 1;
-            while (i < n)
-            {
-                if (arr[i] >= arr[i - 1])
-                {
-                    i++;
-                }
-                else
-                {
-                    Swap(arr, i, i - 1);
-                    if (i > 1)
-                    {
-                        i--;
-                    }
                 }
             }
         }
@@ -86,52 +66,68 @@
             }
         }
 
-        public static void InsertionSort(int[] arr)
+        public static void CombSort(int[] arr)
         {
             int n = arr.Length;
+            int gap = n;
+            bool swapped = true;
 
-            for (int i = 1; i < n; i++)
+            while (gap > 1 || swapped)
             {
-                int temp = arr[i];
-                int j = i - 1;
+                gap = GetNextGap(gap);
+                swapped = false;
 
-                while (j >= 0 && arr[j] > temp)
+                for (int i = 0; i < n - gap; i++)
                 {
-                    arr[j + 1] = arr[j];
-                    j--;
-                }
-
-                arr[j + 1] = temp;
-            }
-        }
-
-        public static void SelectionSort(int[] arr)
-        {
-            int n = arr.Length;
-
-            for (int i = 0; i < n; i++)
-            {
-                int minIndex = i;
-                for (int j = i; j < n; j++)
-                {
-                    if (arr[j] < arr[minIndex])
+                    if (arr[i] > arr[i + gap])
                     {
-                        minIndex = j;
+                        Swap(arr, i, i + gap);
+                        swapped = true;
                     }
                 }
-                if (minIndex != i)
+            }
+        }
+
+        private static int GetNextGap(int gap)
+        {
+            gap = (gap * 10) / 13;
+            return Math.Max(1, gap);
+        }
+
+        public static void GnomeSort(int[] arr)
+        {
+            int n = arr.Length;
+            int i = 1;
+            while (i < n)
+            {
+                if (arr[i] >= arr[i - 1])
                 {
-                    Swap(arr, i, minIndex);
+                    i++;
+                }
+                else
+                {
+                    Swap(arr, i, i - 1);
+                    if (i > 1)
+                    {
+                        i--;
+                    }
                 }
             }
         }
 
-        public static void Swap(int[] arr, int i, int j)
+        public static void QuickSort(int[] arr)
         {
-            //int temp = arr[i];
-            //arr[i] = arr[j];
-            //arr[j] = temp;
-            (arr[j], arr[i]) = (arr[i], arr[j]);
+            QuickSort(arr, 0, arr.Length - 1);
+        }
+
+        private static void QuickSort(int[] arr, int left, int right)
+        {
+            if (left < right)
+            {
+                int pivot = Partition(arr, left, right);
+                QuickSort(arr, left, pivot - 1);
+                QuickSort(arr, pivot + 1, right);
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SortAlgorithmsLibrary
 {
-    public partial class SortAlgorithms
+    public class HybridSorts : SortAlgorithms
     {
         public static void TimSort(int[] arr)
         {
@@ -19,7 +19,7 @@
             }
 
             int size = minRun;
-            while(size < n)
+            while (size < n)
             {
                 for (int left = 0; left < n; left += 2 * size)
                 {
@@ -104,7 +104,7 @@
         private static int GetMinRun(int n)
         {
             int r = 0;
-            while( n >= 64)
+            while (n >= 64)
             {
                 r |= n & 1;
                 n >>= 1;
@@ -121,9 +121,9 @@
 
         private static void IntroSortRecursive(int[] arr, int left, int right, int depthLimit)
         {
-            if(left < right)
+            if (left < right)
             {
-                if(depthLimit == 0)
+                if (depthLimit == 0)
                 {
                     // If the depth limit is reached, switch to Heapsort
                     HeapSort(arr, left, right);
@@ -173,7 +173,7 @@
                 largest = left;
             }
 
-            if(right < n && arr[offset + right] > arr[offset + largest])
+            if (right < n && arr[offset + right] > arr[offset + largest])
             {
                 largest = right;
             }

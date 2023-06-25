@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SortAlgorithmTesting
+﻿namespace SortAlgorithmTesting
 {
     [TestFixture]
-    public class QuickSortTesting
+    public class MergeSortsTesting
     {
         [Test]
-        public void QuickSortArrayIsEmptyTest()
+        public void MergeSortArrayIsEmptyTest()
         {
 
             int[] arr = Array.Empty<int>();
 
-            SortAlgorithms.QuickSort(arr);
+            MergeSorts.MergeSort(arr);
             Assert.That(arr, Is.Empty);
         }
 
         [TestCase(10)]
         [TestCase(50)]
         [TestCase(100)]
-        public void QuickSortMultiTest(int arraySize)
+        public void MergeSortMultiTest(int arraySize)
         {
             // Generate random array
             int min = -1000000;
@@ -34,7 +28,7 @@ namespace SortAlgorithmTesting
             Array.Sort(expected);
 
             // Apply Bubble Sort algorithm to the array
-            SortAlgorithms.QuickSort(arr);
+            MergeSorts.MergeSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);

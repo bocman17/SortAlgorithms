@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SortAlgorithmTesting
+﻿namespace SortAlgorithmTesting
 {
     [TestFixture]
-    public class SelectionSortTesting
+    public class OtherSortsTesting
     {
         [Test]
-        public void SelectionSortArrayIsEmptyTest()
+        public void PancakeSortArrayIsEmptyTest()
         {
 
             int[] arr = Array.Empty<int>();
 
-            SortAlgorithms.SelectionSort(arr);
+            OtherSorts.PancakeSort(arr);
             Assert.That(arr, Is.Empty);
         }
 
         [TestCase(10)]
         [TestCase(50)]
         [TestCase(100)]
-        public void SelectionSortMultiTest(int arraySize)
+        public void PancakeSortMultiTest(int arraySize)
         {
             // Generate random array
             int min = -1000000;
@@ -33,8 +27,8 @@ namespace SortAlgorithmTesting
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Bubble Sort algorithm to the array
-            SortAlgorithms.SelectionSort(arr);
+            // Apply Pancake Sort algorithm to the array
+            OtherSorts.PancakeSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);

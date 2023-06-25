@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SortAlgorithmTesting
+﻿namespace SortAlgorithmTesting
 {
     [TestFixture]
-    public class CombSortTesting
+    public class DistributionSortsTesting
     {
         [Test]
-        public void CombSortArrayIsEmptyTest()
+        public void RadixSortArrayIsEmptyTest()
         {
 
             int[] arr = Array.Empty<int>();
 
-            SortAlgorithms.CombSort(arr);
+            DistributionSorts.RadixSort(arr);
             Assert.That(arr, Is.Empty);
         }
 
         [TestCase(10)]
         [TestCase(50)]
         [TestCase(100)]
-        public void CombSortMultiTest(int arraySize)
+        public void RadixSortMultiTest(int arraySize)
         {
             // Generate random array
             int min = -1000000;
@@ -33,8 +27,8 @@ namespace SortAlgorithmTesting
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Comb Sort algorithm to the array
-            SortAlgorithms.CombSort(arr);
+            // Apply Bubble Sort algorithm to the array
+            DistributionSorts.RadixSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);

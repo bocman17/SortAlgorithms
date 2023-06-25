@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 namespace SortAlgorithmTesting
 {
     [TestFixture]
-    public class CycleSortTesting
+    public class ImpracticalSortsTesting
     {
         [Test]
-        public void CycleSortArrayIsEmptyTest()
+        public void BogoSortArrayIsEmptyTest()
         {
 
             int[] arr = Array.Empty<int>();
 
-            SortAlgorithms.CycleSort(arr);
+            ImpracticalSorts.BogoSort(arr);
             Assert.That(arr, Is.Empty);
         }
 
+        [TestCase(5)]
+        [TestCase(8)]
         [TestCase(10)]
-        [TestCase(50)]
-        [TestCase(100)]
-        public void CycleSortMultiTest(int arraySize)
+        public void BogoSortMultiTest(int arraySize)
         {
             // Generate random array
             int min = -1000000;
@@ -33,8 +33,8 @@ namespace SortAlgorithmTesting
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Cycle Sort algorithm to the array
-            SortAlgorithms.CycleSort(arr);
+            // Apply Bogo Sort algorithm to the array
+            ImpracticalSorts.BogoSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);
