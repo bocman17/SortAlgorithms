@@ -63,6 +63,99 @@
             }
         }
 
+        public static void SmoothSort(int[] arr)
+        {
+            int n = arr.Length;
+
+            int p = n - 1;
+            int q = p;
+            int r = 0;
+
+            // Build the Leonardo heap by merging
+            // pairs of adjacent trees
+            while (p > 0)
+            {
+                if ((r & 0x03) == 0)
+                {
+                    HeapifyLeonardo(arr, r, q);
+                }
+
+                if (Leonardo(r) == p)
+                {
+                    r++;
+                }
+                else
+                {
+                    r--;
+                    q -= Leonardo(r);
+                    HeapifyLeonardo(arr, r, q);
+                    q = r - 1;
+                    r++;
+                }
+                Swap(arr, 0, p);
+                p--;
+            }
+
+            // Convert the Leonardo heap
+            // back into an array
+            for (int i = 0; i < n - 1; i++)
+            {
+                int j = i + 1;
+                while (j > 0 && arr[j] < arr[j - 1])
+                {
+                    Swap(arr, j, j - 1);
+                    j--;
+                }
+            }
+        }
+
+        private static void HeapifyLeonardo(int[] arr, int start, int end)
+        {
+            int i = start;
+            int j = 0;
+            int k = 0;
+
+            while (k < end - start + 1)
+            {
+                if ((k & 0xAAAAAAAA) == 0xAAAAAAAA)
+                {
+                    j += i;
+                    i >>= 1;
+                }
+                else
+                {
+                    i += j;
+                    j >>= 1;
+                }
+                k++;
+            }
+
+            while (i > 0)
+            {
+                j >>= 1;
+                int l = i + j;
+                while (l < end)
+                {
+                    if (arr[l] > arr[l - i])
+                    {
+                        break;
+                    }
+                    Swap(arr, l, l - i);
+                    l += i;
+                }
+                i = j;
+            }
+        }
+
+        private static int Leonardo(int k)
+        {
+            if (k < 2)
+            {
+                return 1;
+            }
+            return Leonardo(k - 1) + Leonardo(k - 2) + 1;
+        }
+
         public static void CycleSort(int[] arr)
         {
             int n = arr.Length;
@@ -133,55 +226,6 @@
             }
         }
 
-        public static void SmoothSort(int[] arr)
-        {
-            int n = arr.Length;
-
-            for (int i = 1; i < n; i++)
-            {
-                SmoothDown(arr, i);
-            }
-
-            for (int size = n - 1; size > 1; size--)
-            {
-                Swap(arr, 0, size);
-                SmoothUp(arr, 0, size - 1);
-            }
-        }
-
-        private static void SmoothUp(int[] arr, int start, int end)
-        {
-            int i = end;
-            while (i > start)
-            {
-                int j = i - 1;
-                while (j >= start && arr[j] > arr[i])
-                {
-                    j--;
-                }
-                Rotate(arr, j + 1, i + 1);
-                i = j;
-            }
-        }
-
-        private static void Rotate(int[] arr, int start, int end)
-        {
-            int temp = arr[end];
-            while (end > start)
-            {
-                arr[end] = arr[end - 1];
-                end--;
-            }
-            arr[start] = temp;
-        }
-
-        private static void SmoothDown(int[] arr, int i)
-        {
-            while (i > 0 && arr[i - 1] > arr[i])
-            {
-                Swap(arr, i, i - 1);
-                i--;
-            }
-        }
+        
     }
 }

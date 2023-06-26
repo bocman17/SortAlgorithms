@@ -66,6 +66,37 @@
             }
         }
 
+        public static void OddEvenSort(int[] arr)
+        {
+            bool isSorted = false; // Flag to track if array is sorted
+            int n = arr.Length;
+
+            while (!isSorted)
+            {
+                isSorted = true;
+
+                // Perform odd-even comparisions and swaps
+                for (int i = 1; i < n - 1; i += 2)
+                {
+                    if (arr[i] > arr[i + 1])
+                    {
+                        Swap(arr, i, i + 1);
+                        isSorted = false;
+                    }
+                }
+
+                // Perform even-odd comparisions and swaps
+                for (int i = 0; i < n - 1; i += 2)
+                {
+                    if (arr[i] > arr[i + 1])
+                    {
+                        Swap(arr, i, i + 1);
+                        isSorted = false;
+                    }
+                }
+            }
+        }
+
         public static void CombSort(int[] arr)
         {
             int n = arr.Length;
@@ -113,6 +144,97 @@
                     }
                 }
             }
+        }
+
+        public static void PESort(int[] arr)
+        {
+            int p = 16; // Adjust the value of p based on your needs
+
+            PESortRecursive(arr, 0, arr.Length - 1, p);
+        }
+
+        private static void PESortRecursive(int[] arr, int left, int right, int p)
+        {
+            if (left < right)
+            {
+                if (right - left + 1 > p)
+                {
+                    int median = MedianOfThree(arr, left, right);
+                    int[] partitionIndices = Partition(arr, left, right, median);
+
+                    PESortRecursive(arr, left, partitionIndices[0] - 1, p);
+                    PESortRecursive(arr, partitionIndices[1] + 1, right, p);
+                }
+                else
+                {
+                    InsertionSort(arr, left, right);
+                }
+            }
+        }
+
+        private static int[] Partition(int[] arr, int left, int right, int pivot)
+        {
+            int i = left;
+            int j = right;
+
+            while (true)
+            {
+                while (arr[i] < pivot)
+                    i++;
+
+                while (arr[j] > pivot)
+                    j--;
+
+                if (i >= j)
+                    break;
+
+                Swap(arr, i, j);
+
+                if (arr[i] == pivot)
+                {
+                    i++;
+                }
+
+                if (arr[j] == pivot)
+                {
+                    j--;
+                }
+            }
+
+            return new int[] { i, j };
+        }
+
+        private static void InsertionSort(int[] arr, int left, int right)
+        {
+            for (int i = left + 1; i <= right; i++)
+            {
+                int key = arr[i];
+                int j = i - 1;
+
+                while (j >= left && arr[j] > key)
+                {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+
+                arr[j + 1] = key;
+            }
+        }
+
+        private static int MedianOfThree(int[] arr, int left, int right)
+        {
+            int mid = left + (right - left) / 2;
+
+            if (arr[left] > arr[mid])
+                Swap(arr, left, mid);
+
+            if (arr[left] > arr[right])
+                Swap(arr, left, right);
+
+            if (arr[mid] > arr[right])
+                Swap(arr, mid, right);
+
+            return arr[mid];
         }
 
         public static void QuickSort(int[] arr)

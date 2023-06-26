@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 int min = -10000;
 int max = 10000;
-int[] arr = GenerateRandomArray(15, min, max);
+int[] arr = GenerateRandomArray(100, min, max);
 Console.WriteLine("Unsorted");
 foreach (var item in arr)
 {
@@ -16,7 +16,7 @@ int[] expected = new int[arr.Length];
 Array.Copy(arr, expected, arr.Length);
 Array.Sort(expected);
 
-SelectionSorts.SmoothSort(arr);
+ExchangeSorts.PESort(arr);
 
 Console.WriteLine("Expected");
 foreach (int i in expected)

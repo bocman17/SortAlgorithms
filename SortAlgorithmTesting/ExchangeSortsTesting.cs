@@ -58,8 +58,39 @@
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Bubble Sort algorithm to the array
+            // Apply CoctailShake Sort algorithm to the array
             ExchangeSorts.CoctailShakeSort(arr);
+
+            // Assert that the sorted array matches the expected sorted array
+            CollectionAssert.AreEqual(expected, arr);
+        }
+
+        [Test]
+        public void OddEvenSortArrayIsEmptyTest()
+        {
+
+            int[] arr = Array.Empty<int>();
+
+            ExchangeSorts.OddEvenSort(arr);
+            Assert.That(arr, Is.Empty);
+        }
+
+        [TestCase(10)]
+        [TestCase(50)]
+        [TestCase(100)]
+        public void OddEvenSortMultiTest(int arraySize)
+        {
+            // Generate random array
+            int min = -1000000;
+            int max = 1000000;
+            var arr = TestHelper.GenerateRandomArray(arraySize, min, max);
+
+            // Create a sorted copy
+            var expected = arr.ToArray();
+            Array.Sort(expected);
+
+            // Apply OddEven Sort algorithm to the array
+            ExchangeSorts.OddEvenSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);
@@ -120,8 +151,39 @@
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Bubble Sort algorithm to the array
+            // Apply Gnome Sort algorithm to the array
             ExchangeSorts.GnomeSort(arr);
+
+            // Assert that the sorted array matches the expected sorted array
+            CollectionAssert.AreEqual(expected, arr);
+        }
+
+        [Test]
+        public void PESortArrayIsEmptyTest()
+        {
+
+            int[] arr = Array.Empty<int>();
+
+            ExchangeSorts.PESort(arr);
+            Assert.That(arr, Is.Empty);
+        }
+
+        [TestCase(10)]
+        [TestCase(50)]
+        [TestCase(100)]
+        public void PESortMultiTest(int arraySize)
+        {
+            // Generate random array
+            int min = -1000000;
+            int max = 1000000;
+            var arr = TestHelper.GenerateRandomArray(arraySize, min, max);
+
+            // Create a sorted copy
+            var expected = arr.ToArray();
+            Array.Sort(expected);
+
+            // Apply PE Sort algorithm to the array
+            ExchangeSorts.PESort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);
@@ -151,7 +213,7 @@
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Bubble Sort algorithm to the array
+            // Apply Quick Sort algorithm to the array
             ExchangeSorts.QuickSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
