@@ -16,7 +16,8 @@ int[] expected = new int[arr.Length];
 Array.Copy(arr, expected, arr.Length);
 Array.Sort(expected);
 
-ExchangeSorts.PESort(arr);
+
+SelectionSorts.TournamentSort(arr);
 
 Console.WriteLine("Expected");
 foreach (int i in expected)
