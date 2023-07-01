@@ -277,7 +277,7 @@ namespace SortAlgorithmsLibrary
         public static void TournamentSort(int[] arr)
         {
             int n = arr.Length;
-            if(n < 2)
+            if (n < 2)
             {
                 return;
             }
@@ -434,6 +434,58 @@ namespace SortAlgorithmsLibrary
             }
         }
 
+        public static void WeakHeapSort(int[] arr)
+        {
+            int n = arr.Length;
+            if (n < 2)
+            {
+                return;
+            }
 
+            // Build the weak heap
+            for (int i = n / 2 - 1; i >= 0; i--)
+            {
+                SiftDown(arr, i, n);
+            }
+
+            // Sort the array by repeatedly exchanging the root with the last element and sifting down
+            for (int i = n - 1; i > 0; i--)
+            {
+                Swap(arr, 0, i); // Swap the root with the last element
+                SiftDown(arr, 0, i); // Sift down to maintain the weak heap property
+            }
+        }
+
+        private static void SiftDown(int[] arr, int root, int n)
+        {
+            int j = root;
+            int lastChild = n / 2 - 1; // Find the last child (height 1) of the root
+
+            while (j <= lastChild)
+            {
+                int leftChild = 2 * j + 1; // Left child index
+                int rightChild = 2 * j + 2; // Right child index
+                int targetChild;
+
+                if (rightChild < n && arr[rightChild] > arr[leftChild]) // Modified condition for ascending order
+                {
+                    targetChild = rightChild; // Choose the larger child
+                }
+                else
+                {
+                    targetChild = leftChild;
+                }
+
+                if (arr[targetChild] > arr[j]) // Modified comparison for ascending order
+                {
+                    Swap(arr, j, targetChild); // Swap the target child with the root
+                    j = targetChild; // Move to the child for the next iteration
+                }
+                else
+                {
+                    break; // Break if the weak heap property is satisfied
+                }
+            }
+        }
     }
 }

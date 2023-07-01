@@ -17,7 +17,7 @@ Array.Copy(arr, expected, arr.Length);
 Array.Sort(expected);
 
 
-SelectionSorts.TournamentSort(arr);
+SelectionSorts.WeakHeapSort(arr);
 
 Console.WriteLine("Expected");
 foreach (int i in expected)
