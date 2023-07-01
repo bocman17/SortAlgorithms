@@ -1,4 +1,8 @@
-﻿namespace SortAlgorithmsLibrary
+﻿using SortAlgorithms.HelperClasses;
+using System.Xml.Linq;
+using System;
+
+namespace SortAlgorithmsLibrary
 {
     public class InsertionSorts : SortAlgorithms
     {
@@ -42,6 +46,23 @@
                 }
                 gap /= 2;
             }
+        }
+
+        public static void SplaySort(int[] arr)
+        {
+            SplayTree tree = new SplayTree();
+            Node? root = null;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                root = tree.Insert(root, arr[i]);
+            }
+            int index = 0;
+
+            tree.InOrderTraversal(root, (key) =>
+            {
+                arr[index++] = key;
+            });
         }
     }
 }

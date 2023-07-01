@@ -27,7 +27,7 @@
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Bubble Sort algorithm to the array
+            // Apply Insertion Sort algorithm to the array
             InsertionSorts.InsertionSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
@@ -60,6 +60,37 @@
 
             // Apply Shell Sort algorithm to the array
             InsertionSorts.ShellSort(arr);
+
+            // Assert that the sorted array matches the expected sorted array
+            CollectionAssert.AreEqual(expected, arr);
+        }
+
+        [Test]
+        public void SplaySortArrayIsEmptyTest()
+        {
+
+            int[] arr = Array.Empty<int>();
+
+            InsertionSorts.SplaySort(arr);
+            Assert.That(arr, Is.Empty);
+        }
+
+        [TestCase(10)]
+        [TestCase(50)]
+        [TestCase(100)]
+        public void SplaySortMultiTest(int arraySize)
+        {
+            // Generate random array
+            int min = -1000000;
+            int max = 1000000;
+            var arr = TestHelper.GenerateRandomArray(arraySize, min, max);
+
+            // Create a sorted copy
+            var expected = arr.ToArray();
+            Array.Sort(expected);
+
+            // Apply Splay Sort algorithm to the array
+            InsertionSorts.SplaySort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);

@@ -3,6 +3,14 @@
 {
     public class ExchangeSorts : SortAlgorithms
     {
+        /// <summary>
+        /// Sorts an array of integers using the Bubble Sort algorithm.
+        /// </summary>
+        /// <param name="arr">The array to be sorted.</param>
+        /// <remarks>
+        /// Time Complexity: O(n^2) - where n is the number of elements in the array.
+        /// Space Complexity: O(1) - Bubble Sort is an in-place sorting algorithm.
+        /// </remarks>
         public static void BubbleSort(int[] arr)
         {
             int n = arr.Length - 1;
