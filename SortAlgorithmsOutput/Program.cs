@@ -17,7 +17,7 @@ Array.Copy(arr, expected, arr.Length);
 Array.Sort(expected);
 
 
-ExchangeSorts.BubbleSort(arr);
+ExchangeSorts.QuickSort(arr);
 
 Console.WriteLine("Expected");
 foreach (int i in expected)
@@ -67,7 +67,7 @@ int[] CoctailShakeArr = GenerateRandomArray(4096, min, max);
 AlgoInfo CoctailShakeSort = new AlgoInfo("CoctailShakeSort");
 Stopwatch CoctailShakeWatch = new Stopwatch();
 CoctailShakeWatch.Start();
-ExchangeSorts.CoctailShakeSort(CoctailShakeArr);
+ExchangeSorts.CoctailShakerSort(CoctailShakeArr);
 CoctailShakeWatch.Stop();
 CoctailShakeSort.InputArrLen = CoctailShakeArr.Length;
 CoctailShakeSort.Ticks = CoctailShakeWatch.ElapsedTicks;

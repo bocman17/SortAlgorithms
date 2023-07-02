@@ -40,7 +40,7 @@
 
             int[] arr = Array.Empty<int>();
 
-            ExchangeSorts.CoctailShakeSort(arr);
+            ExchangeSorts.CoctailShakerSort(arr);
             Assert.That(arr, Is.Empty);
         }
 
@@ -59,7 +59,7 @@
             Array.Sort(expected);
 
             // Apply CoctailShake Sort algorithm to the array
-            ExchangeSorts.CoctailShakeSort(arr);
+            ExchangeSorts.CoctailShakerSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);
