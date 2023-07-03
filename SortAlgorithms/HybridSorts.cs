@@ -2,6 +2,27 @@
 {
     public class HybridSorts : SortAlgorithms
     {
+        /// <summary>
+        /// Sorts an array of integers in ascending order using the TimSort algorithm.
+        /// </summary>
+        /// <param name="arr">The array to be sorted.</param>
+        /// <remarks>
+        /// <para>
+        /// TimSort is a hybrid sorting algorithm derived from Merge Sort and Insertion Sort. It works by dividing the
+        /// array into small runs and sorting them using Insertion Sort. The sorted runs are then merged using a modified
+        /// Merge Sort algorithm. TimSort is highly efficient for sorting real-world data that often has some degree of
+        /// pre-sortedness or patterns.
+        /// </para>
+        /// <para>
+        /// <b>Time Complexity:</b> O(n log n) - where n is the number of elements in the array. TimSort has a time complexity
+        /// of O(n log n) on average and in the worst-case scenarios. It performs well on both small and large arrays and is
+        /// particularly efficient for partially sorted or nearly sorted arrays.
+        /// </para>
+        /// <para>
+        /// <b>Space Complexity:</b> O(n) - TimSort requires additional space for merging the runs and temporary arrays.
+        /// The space complexity is determined by the size of the input array.
+        /// </para>
+        /// </remarks>
         public static void TimSort(int[] arr)
         {
             int n = arr.Length;
@@ -113,6 +134,27 @@
             return n + r;
         }
 
+        /// <summary>
+        /// Sorts an array of integers in ascending order using the IntroSort algorithm.
+        /// </summary>
+        /// <param name="arr">The array to be sorted.</param>
+        /// <remarks>
+        /// <para>
+        /// IntroSort is a hybrid sorting algorithm that combines the quicksort, heapsort, and insertion sort algorithms.
+        /// It starts with quicksort and switches to heapsort when the recursion depth exceeds a specified limit. If the
+        /// input size becomes small, it switches to insertion sort for efficiency. IntroSort provides a good balance
+        /// between the average-case and worst-case time complexities of the sorting algorithms it combines.
+        /// </para>
+        /// <para>
+        /// <b>Time Complexity:</b>
+        /// - Average Case: O(n log n) - IntroSort has an average-case time complexity of O(n log n) for most inputs.
+        /// - Worst Case: O(n log n) - In the worst-case scenario, the time complexity is O(n log n), similar to quicksort.
+        /// </para>
+        /// <para>
+        /// <b>Space Complexity:</b> O(log n) - The space complexity of IntroSort is determined by the stack space used
+        /// for recursion, which is proportional to the logarithm of the input size.
+        /// </para>
+        /// </remarks>
         public static void IntroSort(int[] arr)
         {
             int maxDepth = (int)Math.Floor(Math.Log(arr.Length, 2)) * 2;
