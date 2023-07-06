@@ -1,22 +1,22 @@
 ﻿namespace SortAlgorithmTesting
 {
     [TestFixture]
-    public class DistributionSortsTesting
+    public class ConcurrentSortsTesting
     {
         [Test]
-        public void RadixSortArrayIsEmptyTest()
+        public void BitonicMergeSortArrayIsEmptyTest()
         {
 
             int[] arr = Array.Empty<int>();
 
-            DistributionSorts.RadixSort(arr);
+            ConcurrentSorts.BitonicMergeSort(arr);
             Assert.That(arr, Is.Empty);
         }
 
         [TestCase(10)]
         [TestCase(50)]
-        [TestCase(100)]
-        public void RadixSortMultiTest(int arraySize)
+        [TestCase(4096)]
+        public void BitonicMergeSortMultiTest(int arraySize)
         {
             // Generate random array
             int min = -1000000;
@@ -27,8 +27,8 @@
             var expected = arr.ToArray();
             Array.Sort(expected);
 
-            // Apply Radix Sort algorithm to the array
-            DistributionSorts.RadixSort(arr);
+            // Apply BitonicMerge Sort algorithm to the array
+            ConcurrentSorts.BitonicMergeSort(arr);
 
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);

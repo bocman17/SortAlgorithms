@@ -372,7 +372,6 @@
         public static void QuickSort(int[] arr)
         {
             QuickSort(arr, 0, arr.Length - 1); // Call the private QuickSort method with initial left and right indices
-
         }
 
         private static void QuickSort(int[] arr, int left, int right)
