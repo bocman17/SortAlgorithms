@@ -33,5 +33,36 @@
             // Assert that the sorted array matches the expected sorted array
             CollectionAssert.AreEqual(expected, arr);
         }
+
+        [Test]
+        public void SpaghettiSortArrayIsEmptyTest()
+        {
+
+            int[] arr = Array.Empty<int>();
+
+            OtherSorts.SpaghettiSort(arr);
+            Assert.That(arr, Is.Empty);
+        }
+
+        [TestCase(10)]
+        [TestCase(50)]
+        [TestCase(100)]
+        public void SpaghettiSortMultiTest(int arraySize)
+        {
+            // Generate random array
+            int min = -1000000;
+            int max = 1000000;
+            var arr = TestHelper.GenerateRandomArray(arraySize, min, max);
+
+            // Create a sorted copy
+            var expected = arr.ToArray();
+            Array.Sort(expected);
+
+            // Apply Spaghetti Sort algorithm to the array
+            OtherSorts.SpaghettiSort(arr);
+
+            // Assert that the sorted array matches the expected sorted array
+            CollectionAssert.AreEqual(expected, arr);
+        }
     }
 }

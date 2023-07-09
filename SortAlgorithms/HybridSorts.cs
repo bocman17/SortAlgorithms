@@ -50,7 +50,6 @@
                     // Merge adjacent runs
                     Merge(arr, left, mid, right);
                 }
-
                 size *= 2;
             }
         }
