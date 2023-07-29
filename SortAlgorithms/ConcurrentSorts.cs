@@ -4,6 +4,7 @@ namespace SortAlgorithmsLibrary
 {
     public class ConcurrentSorts : SortAlgorithms
     {
+        #region BitonicMergeSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Bitonic Merge Sort algorithm.
         /// </summary>
@@ -89,7 +90,9 @@ namespace SortAlgorithmsLibrary
             }
             return k >> 1; // Right shift to get the greatest power of 2 less than n
         }
+        #endregion
 
+        #region BatcherOddEvenMergeSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Batcher's Odd-Even Merge Sort algorithm.
         /// </summary>
@@ -143,7 +146,6 @@ namespace SortAlgorithmsLibrary
                 OddEvenMerge(array, low, high);
             }
         }
-
         private static void OddEvenMerge(int[] array, int low, int high)
         {
             if (high > low)
@@ -198,7 +200,9 @@ namespace SortAlgorithmsLibrary
             // Copy the sorted elements back to the original array
             Array.Copy(temp, 0, array, low, n);
         }
+        #endregion
 
+        #region PairwiseSortingNetworkSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Pairwise Sorting Network Sort algorithm.
         /// </summary>
@@ -276,7 +280,6 @@ namespace SortAlgorithmsLibrary
                 });
             }
         }
-
         private static void MergeSubArrays(int[] array, int low, int mid, int high)
         {
             int[] temp = new int[high - low + 1];
@@ -323,7 +326,9 @@ namespace SortAlgorithmsLibrary
                 array[low + x] = temp[x];
             }
         }
+        #endregion
 
+        #region SampleSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Sample Sort algorithm.
         /// </summary>
@@ -408,7 +413,6 @@ namespace SortAlgorithmsLibrary
                 }
             }
         }
-
         private static void SmallSort(int[] array, int left, int right)
         {
             // A simple insertion sort for small ranges
@@ -444,7 +448,6 @@ namespace SortAlgorithmsLibrary
             // Sort the selected splitters
             SmallSort(splitters, 0, splitters.Length - 1);
         }
-
         private static void PartitionElements(int[] array, int left, int right, int[] splitters, int[] bucketSizes, int[] bucketIndexes)
         {
             // Initialize the array to hold the number of elements in each bucket
@@ -482,8 +485,6 @@ namespace SortAlgorithmsLibrary
             // Copy the elements from the temporary array back to the original array
             Array.Copy(tempArray, 0, array, left, tempArray.Length);
         }
-
-
         private static int GetBucket(int value, int[] splitters)
         {
             int left = 0;
@@ -501,5 +502,6 @@ namespace SortAlgorithmsLibrary
 
             return left;
         }
+        #endregion
     }
 }

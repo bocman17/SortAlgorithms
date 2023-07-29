@@ -2,6 +2,8 @@
 {
     public class MergeSorts : SortAlgorithms
     {
+        #region MergeSort
+
         /// <summary>
         /// Sorts an array of integers in ascending order using the MergeSort algorithm.
         /// </summary>
@@ -85,5 +87,146 @@
                 mergedIndex++;
             }
         }
+        #endregion
+
+        #region PolyphaseMergeSort
+
+        private static void InsertionSort(int[] arr)
+        {
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int key = arr[i];
+                int j = i - 1;
+
+                while (j >= 0 && arr[j] > key)
+                {
+                    arr[j + 1] = arr[j];
+                    j--;
+                }
+
+                arr[j + 1] = key;
+            }
+        }
+
+        private static void Merge(int[] arr, int[][] source, int leftStart, int leftEnd, int rightStart, bool sourceIsArr)
+        {
+            int i = leftStart;
+            int j = rightStart;
+            int k = leftStart;
+
+            if (sourceIsArr)
+            {
+                while (i <= leftEnd && j < arr.Length)
+                {
+                    if (source[0][i] <= arr[j])
+                    {
+                        arr[k++] = source[0][i++];
+                    }
+                    else
+                    {
+                        arr[k++] = arr[j++];
+                    }
+                }
+
+                while (i <= leftEnd)
+                {
+                    arr[k++] = source[0][i++];
+                }
+            }
+            else
+            {
+                while (i < arr.Length && j <= leftEnd)
+                {
+                    if (arr[i] <= source[1][j])
+                    {
+                        arr[k++] = arr[i++];
+                    }
+                    else
+                    {
+                        arr[k++] = source[1][j++];
+                    }
+                }
+
+                while (i < arr.Length)
+                {
+                    arr[k++] = arr[i++];
+                }
+            }
+        }
+
+
+
+        public static void PolyphaseMergeSort(int[] arr)
+        {
+            int blockSize = 8; // Adjust the blockSize as needed
+            int numBlocks = (int)Math.Ceiling(arr.Length / (double)blockSize);
+            int[][] blocks = new int[2][];
+            blocks[0] = new int[blockSize];
+            blocks[1] = new int[blockSize];
+
+            // Step 1: Create initial sorted runs of blockSize
+            int leftEnd = 0;
+            int rightEnd = 0;
+            bool sourceIsArr = true;
+
+            for (int i = 0; i < numBlocks; i += 2)
+            {
+                int leftStart = i * blockSize;
+                leftEnd = Math.Min(leftStart + blockSize - 1, arr.Length - 1);
+
+                int rightStart = leftEnd + 1;
+                rightEnd = Math.Min(rightStart + blockSize - 1, arr.Length - 1);
+
+                if (rightStart <= rightEnd)
+                {
+                    Array.Copy(arr, leftStart, blocks[0], 0, blockSize);
+                    Array.Copy(arr, rightStart, blocks[1], 0, blockSize);
+
+                    InsertionSort(blocks[0]);
+                    InsertionSort(blocks[1]);
+
+                    Merge(arr, blocks, leftStart, leftEnd, rightStart, sourceIsArr);
+                }
+            }
+
+            // Step 2: Merge remaining runs
+            int totalRuns = numBlocks;
+            sourceIsArr = false;
+
+            while (totalRuns < arr.Length)
+            {
+                int runsToMerge = Math.Min(totalRuns, numBlocks);
+                int destIndex = 0;
+
+                for (int i = 0; i < runsToMerge; i += 2)
+                {
+                    int leftStart = i * blockSize;
+                    leftEnd = Math.Min(leftStart + blockSize - 1, arr.Length - 1);
+
+                    int rightStart = leftEnd + 1;
+                    rightEnd = Math.Min(rightStart + blockSize - 1, arr.Length - 1);
+
+                    if (rightStart <= rightEnd)
+                    {
+                        Array.Copy(arr, leftStart, blocks[0], 0, blockSize);
+                        Array.Copy(arr, rightStart, blocks[1], 0, blockSize);
+
+                        Merge(arr, blocks, leftStart, leftEnd, rightStart, sourceIsArr);
+                        destIndex = rightEnd;
+                    }
+                    else
+                    {
+                        // Copy the remaining run back to the destination array
+                        Array.Copy(arr, leftStart, arr, destIndex, blockSize);
+                    }
+                }
+
+                totalRuns += runsToMerge;
+                sourceIsArr = !sourceIsArr;
+            }
+        }
+
+
+        #endregion
     }
 }

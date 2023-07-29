@@ -39,7 +39,7 @@ static string GenerateRandomString(int stringLength)
     return new string(result);
 }
 
-int[] arr = GenerateRandomArray(10, 0, 10);
+int[] arr = GenerateRandomArray(4096, 0, 10);
 int[] bubbleArr = (int[])arr.Clone();
 int[] quickArr = (int[])arr.Clone();
 int[] SampleArr = (int[])arr.Clone();
@@ -56,7 +56,7 @@ foreach (int num in arr)
     Console.WriteLine(num);
 }
 Console.WriteLine("sorted");
-DistributionSorts.FlashSort(SampleArr);
+MergeSorts.PolyphaseMergeSort(SampleArr);
 foreach (int num in SampleArr)
 {
     Console.WriteLine(num);

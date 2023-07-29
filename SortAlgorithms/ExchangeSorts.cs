@@ -3,6 +3,7 @@
 {
     public class ExchangeSorts : SortAlgorithms
     {
+        #region BubbleSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Bubble Sort algorithm.
         /// </summary>
@@ -42,7 +43,9 @@
                 }
             }
         }
+        #endregion
 
+        #region CoctailShakerSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Cocktail Shaker Sort algorithm.
         /// </summary>
@@ -98,7 +101,9 @@
                 left++; // Move the left boundary one position to the right
             }
         }
+        #endregion
 
+        #region OddEvenSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Odd-Even Sort algorithm.
         /// </summary>
@@ -145,7 +150,9 @@
                 }
             }
         }
+        #endregion
 
+        #region CombSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Comb Sort algorithm.
         /// </summary>
@@ -190,7 +197,9 @@
             gap = (gap * 10) / 13; // Calculate the next gap using a shrink factor of 1.3 (10/13)
             return Math.Max(1, gap); // Ensure the gap is at least 1
         }
+        #endregion
 
+        #region GnomeSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the Gnome Sort algorithm, also known as Stupid Sort.
         /// </summary>
@@ -231,7 +240,9 @@
                 }
             }
         }
+        #endregion
 
+        #region PESort
         /// <summary>
         /// Sorts an array of integers in ascending order using the PESort (Proportion Extend Sort) algorithm.
         /// </summary>
@@ -279,7 +290,6 @@
                 }
             }
         }
-
         private static int[] Partition(int[] arr, int left, int right, int pivot)
         {
             int i = left;
@@ -345,7 +355,9 @@
 
             return arr[mid]; // Return the median value
         }
+        #endregion
 
+        #region QuickSort
         /// <summary>
         /// Sorts an array of integers in ascending order using the QuickSort algorithm.
         /// </summary>
@@ -383,5 +395,6 @@
                 QuickSort(arr, pivot + 1, right); // Recursively sort the right partition
             }
         }
+        #endregion
     }
 }
